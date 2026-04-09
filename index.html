@@ -12,12 +12,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            /* Changed to center to keep it off the top edge */
+            justify-content: center; 
             align-items: center;
             font-family: 'Apex Rounded', 'Segoe UI Rounded', sans-serif;
-            overflow-x: hidden; /* Prevents horizontal scroll */
+            overflow-x: hidden;
             perspective: 2000px;
-            padding: 40px 15px; /* Added side padding to prevent touching edges */
+            /* Added top/bottom padding so it never touches the screen edges */
+            padding: 60px 15px; 
             box-sizing: border-box;
         }
 
@@ -30,20 +32,20 @@
             align-items: center;
         }
 
-        /* REDUCED WIDTH: Set to 85% of screen width to ensure no side cut-off */
+        /* IMPACT ZONE: Narrowed slightly more for mobile safety */
         .impact-zone {
             position: relative;
-            width: 85vw;
-            max-width: 480px; 
+            width: 80vw;
+            max-width: 450px; 
             aspect-ratio: 2.3 / 1; 
-            margin-bottom: 20px;
+            margin-bottom: 30px; /* More breathing room */
             z-index: 1;
             transform-style: preserve-3d;
         }
 
         .new-logo {
             position: absolute;
-            inset: -5%; /* Tighter inset to stay within phone view */
+            inset: -5%; 
             width: 110%; 
             height: 110%;
             object-fit: contain;
@@ -70,6 +72,7 @@
             animation: gravityFall 7s infinite ease-in;
         }
 
+        /* Fragment Grid Positions */
         .fragment:nth-child(1)  { background-position: 0% 0%; }
         .fragment:nth-child(2)  { background-position: 33.3% 0%; }
         .fragment:nth-child(3)  { background-position: 66.6% 0%; }
@@ -83,16 +86,15 @@
         .fragment:nth-child(11) { background-position: 66.6% 100%; }
         .fragment:nth-child(12) { background-position: 100% 100%; }
 
-        /* TEXT SCALING - Shrinks more on mobile to prevent cut-off */
+        /* TITLE: Adjusted line-height and size to prevent top cut-off */
         .title {
             position: relative;
             z-index: 20;
-            font-size: clamp(2rem, 11vw, 7rem); /* Max width reduced to 11% of screen */
+            font-size: clamp(2.2rem, 10vw, 7rem); 
             font-weight: 900;
-            margin: 0;
+            margin: 10px 0 0;
             text-transform: uppercase;
-            line-height: 1.1;
-            white-space: nowrap; /* Keeps words on one line unless they truly don't fit */
+            line-height: 1.2; /* Taller line height stops top clipping */
         }
 
         .subtitle {
@@ -100,9 +102,9 @@
             z-index: 20;
             font-size: clamp(0.9rem, 4vw, 2rem);
             font-weight: 700;
-            letter-spacing: clamp(2px, 1.5vw, 6px); /* Less spacing on mobile */
+            letter-spacing: clamp(2px, 1.5vw, 6px);
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .video-container {
@@ -128,6 +130,7 @@
             19% { opacity: 1; transform: translate3d(var(--tx), var(--ty), 50px) rotate(var(--tr)); }
             35%, 90% { 
                 opacity: 0; 
+                /* Fall behind text/video */
                 transform: translate3d(var(--tx), 1200px, -800px) rotate(calc(var(--tr) * 2)); 
             }
             100% { opacity: 0; }

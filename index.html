@@ -15,9 +15,9 @@
             justify-content: flex-start;
             align-items: center;
             font-family: 'Apex Rounded', 'Segoe UI Rounded', sans-serif;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevents horizontal scroll */
             perspective: 2000px;
-            padding: 40px 20px;
+            padding: 40px 15px; /* Added side padding to prevent touching edges */
             box-sizing: border-box;
         }
 
@@ -30,21 +30,22 @@
             align-items: center;
         }
 
+        /* REDUCED WIDTH: Set to 85% of screen width to ensure no side cut-off */
         .impact-zone {
             position: relative;
-            width: 80vw;
-            max-width: 500px; 
+            width: 85vw;
+            max-width: 480px; 
             aspect-ratio: 2.3 / 1; 
             margin-bottom: 20px;
-            z-index: 1; /* Lowest layer */
+            z-index: 1;
             transform-style: preserve-3d;
         }
 
         .new-logo {
             position: absolute;
-            inset: -10%; 
-            width: 120%; 
-            height: 120%;
+            inset: -5%; /* Tighter inset to stay within phone view */
+            width: 110%; 
+            height: 110%;
             object-fit: contain;
             z-index: 2;
             opacity: 0;
@@ -82,33 +83,34 @@
         .fragment:nth-child(11) { background-position: 66.6% 100%; }
         .fragment:nth-child(12) { background-position: 100% 100%; }
 
-        /* TEXT SCALING - Z-INDEX SET HIGHER THAN FRAGMENTS */
+        /* TEXT SCALING - Shrinks more on mobile to prevent cut-off */
         .title {
             position: relative;
-            z-index: 20; /* High z-index ensures bits fall behind */
-            font-size: clamp(2.5rem, 12vw, 7rem);
+            z-index: 20;
+            font-size: clamp(2rem, 11vw, 7rem); /* Max width reduced to 11% of screen */
             font-weight: 900;
             margin: 0;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.1;
+            white-space: nowrap; /* Keeps words on one line unless they truly don't fit */
         }
 
         .subtitle {
             position: relative;
-            z-index: 20; /* High z-index ensures bits fall behind */
-            font-size: clamp(1rem, 4vw, 2rem);
+            z-index: 20;
+            font-size: clamp(0.9rem, 4vw, 2rem);
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: clamp(2px, 1.5vw, 6px); /* Less spacing on mobile */
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .video-container {
             position: relative;
-            z-index: 30; /* Video stays at the very front */
+            z-index: 30;
             width: 100%;
             max-width: 800px;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
             background: #000;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
@@ -126,7 +128,6 @@
             19% { opacity: 1; transform: translate3d(var(--tx), var(--ty), 50px) rotate(var(--tr)); }
             35%, 90% { 
                 opacity: 0; 
-                /* -800px Z moves them way into the background behind the text/video */
                 transform: translate3d(var(--tx), 1200px, -800px) rotate(calc(var(--tr) * 2)); 
             }
             100% { opacity: 0; }
@@ -139,18 +140,18 @@
         <div class="impact-zone">
             <img src="iLearn LOGO MAIN.png" class="new-logo" alt="New iLearn">
             <div class="shatter-overlay">
-                <div class="fragment" style="--tx:-100px; --ty:-50px; --tr:45deg;"></div>
-                <div class="fragment" style="--tx:-30px; --ty:-80px; --tr:-30deg;"></div>
-                <div class="fragment" style="--tx:30px; --ty:-80px; --tr:20deg;"></div>
-                <div class="fragment" style="--tx:100px; --ty:-50px; --tr:-45deg;"></div>
-                <div class="fragment" style="--tx:-150px; --ty:20px; --tr:-60deg;"></div>
-                <div class="fragment" style="--tx:-50px; --ty:40px; --tr:90deg;"></div>
-                <div class="fragment" style="--tx:50px; --ty:40px; --tr:-90deg;"></div>
-                <div class="fragment" style="--tx:150px; --ty:20px; --tr:60deg;"></div>
-                <div class="fragment" style="--tx:-100px; --ty:100px; --tr:120deg;"></div>
-                <div class="fragment" style="--tx:-30px; --ty:120px; --tr:-150deg;"></div>
-                <div class="fragment" style="--tx:30px; --ty:120px; --tr:150deg;"></div>
-                <div class="fragment" style="--tx:100px; --ty:100px; --tr:-120deg;"></div>
+                <div class="fragment" style="--tx:-80px; --ty:-50px; --tr:45deg;"></div>
+                <div class="fragment" style="--tx:-20px; --ty:-80px; --tr:-30deg;"></div>
+                <div class="fragment" style="--tx:20px; --ty:-80px; --tr:20deg;"></div>
+                <div class="fragment" style="--tx:80px; --ty:-50px; --tr:-45deg;"></div>
+                <div class="fragment" style="--tx:-100px; --ty:20px; --tr:-60deg;"></div>
+                <div class="fragment" style="--tx:-40px; --ty:40px; --tr:90deg;"></div>
+                <div class="fragment" style="--tx:40px; --ty:40px; --tr:-90deg;"></div>
+                <div class="fragment" style="--tx:100px; --ty:20px; --tr:60deg;"></div>
+                <div class="fragment" style="--tx:-80px; --ty:100px; --tr:120deg;"></div>
+                <div class="fragment" style="--tx:-20px; --ty:120px; --tr:-150deg;"></div>
+                <div class="fragment" style="--tx:20px; --ty:120px; --tr:150deg;"></div>
+                <div class="fragment" style="--tx:80px; --ty:100px; --tr:-120deg;"></div>
             </div>
         </div>
 
